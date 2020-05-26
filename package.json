@@ -1,0 +1,43 @@
+{
+  "name": "autoscale-desired-count",
+  "version": "0.0.0",
+  "description": "estimate the number of processes required to keep up with the current demand",
+  "main": "src/index.js",
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "coverage": "nyc npm test",
+    "pretest": "semistandard",
+    "test": "mocha --recursive test"
+  },
+  "repository": {
+    "url": "noblesamurai/autoscale-desired-count",
+    "type": "git"
+  },
+  "author": "autoscale-desired-count <andrew@noblesamurai.com>",
+  "license": "BSD-3-Clause",
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "semistandard": "^14.0.0",
+    "mocha": "^7.0.0",
+    "nyc": "^15.0.0"
+  },
+  "nyc": {
+    "include": [
+      "src"
+    ],
+    "reporter": [
+      "lcov",
+      "text"
+    ],
+    "cache": true,
+    "all": true
+  },
+  "semistandard": {
+    "env": [
+      "mocha"
+    ]
+  }
+}
