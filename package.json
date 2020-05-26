@@ -1,6 +1,6 @@
 {
   "name": "autoscale-desired-count",
-  "version": "0.0.0",
+  "version": "1.0.0-0",
   "description": "estimate the number of processes required to keep up with the current demand",
   "main": "src/index.js",
   "files": [
