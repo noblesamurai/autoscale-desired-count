@@ -2,31 +2,30 @@
 
 > estimate the number of processes required to keep up with the current demand
 
-## Purpose
-- What problem does this module solve? At least a few sentences.
-PLEASE_FILL_IN_HERE
-
-## Usage
-
-```js
-// Several examples of usage.
-// Usually copying and pasting code from the tests and making the code standalone suffices.
-// PLEASE_FILL_IN_HERE
-```
-
-## API
-
-PLEASE_FILL_IN_HERE
-
-Note: To regenerate this section from the jsdoc run `npm run docs` and paste
-the output above.
-
 ## Installation
 
 This module is installed via npm:
 
 ``` bash
 $ npm install autoscale-desired-count
+```
+
+## Usage
+
+```js
+const getCount = require('autoscale-desired-count');
+
+const opts = {
+  concurrency: 1, // the number of concurrent jobs the worker processes
+  deadline: 60, // the time practically all jobs should be completed within
+  meanProcessTime: 10, // mean job processing time
+  requiredCompletionPercentile: 99, // percentile of jobs that should happen within the deadline
+  stddev: 5, // standard deviation (1σ) of job processing time. ie. 68% completed within ± this
+};
+
+const jobs = 500;
+const count = getCount(jobs, opts);
+// count = the number of workers needed to process jobs based on passed in opts
 ```
 
 ## License
