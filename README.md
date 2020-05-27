@@ -6,27 +6,43 @@
 
 This module is installed via npm:
 
-``` bash
+```bash
 $ npm install autoscale-desired-count
 ```
 
-## Usage
+## API
 
-```js
-const getCount = require('autoscale-desired-count');
+### getAutoscaleDesiredCount(demand) ⇒ <code>number</code>
 
-const opts = {
-  concurrency: 1, // the number of concurrent jobs the worker processes
-  deadline: 60, // the time practically all jobs should be completed within
-  meanProcessTime: 10, // mean job processing time
-  requiredCompletionPercentile: 99, // percentile of jobs that should happen within the deadline
-  stddev: 5, // standard deviation (1σ) of job processing time. ie. 68% completed within ± this
-};
+Estimate the number of processes required to keep up with the current demand.
 
-const jobs = 500;
-const count = getCount(jobs, opts);
-// count = the number of workers needed to process jobs based on passed in opts
-```
+| Parameter                           | Type   | Description                                                                                                                          |
+| :---------------------------------- | :----- | :----------------------------------------------------------------------------------------------------------------------------------- |
+| `demand`                            | number | the number of jobs that need to be run                                                                                               |
+| `opts.concurrency`                  | number | the number of concurrent jobs the worker processes.                                                                                  |
+| `opts.deadline`                     | number | the time practically all jobs should be completed within.                                                                            |
+| `opts.meanProcessTime`              | number | mean job processing time.                                                                                                            |
+| `opts.requiredCompletionPercentile` | number | percentile of jobs that should happen within   the deadline.                                                                         |
+| `opts.stddev`                       | number | standard deviation (1σ) of job processing time: 68% completed   within ± this (defaults to half the meanProcessTime).                |
+| `opts.target`                       | number | the number of seconds within which the desired % of tasks will   complete. This will be calculated using other opts if not provided. |
+
+#### Examples
+
+_Get the number of workers required to process 500 jobs within 1 minute given
+each job takes about 10 seconds to run and each worker only runs a single job at a time_
+
+> ```js
+> const getAutoscaleDesiredCount = require('autoscale-desired-count');
+>
+> const opts = {
+>   concurrency: 1,
+>   deadline: 60,
+>   meanProcessTime: 10
+> };
+>
+> const jobs = 500;
+> const count = getAutoscaleDesiredCount(jobs, opts);
+> ```
 
 ## License
 
@@ -39,14 +55,14 @@ All rights reserved.
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
 
-* Redistributions of source code must retain the above copyright notice, this
+- Redistributions of source code must retain the above copyright notice, this
   list of conditions and the following disclaimer.
 
-* Redistributions in binary form must reproduce the above copyright notice, this
+- Redistributions in binary form must reproduce the above copyright notice, this
   list of conditions and the following disclaimer in the documentation and/or
   other materials provided with the distribution.
 
-* Neither the name of the copyright holder nor the names of its
+- Neither the name of the copyright holder nor the names of its
   contributors may be used to endorse or promote products derived from
   this software without specific prior written permission.
 
@@ -60,4 +76,3 @@ LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
 ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
