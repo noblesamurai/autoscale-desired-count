@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "jsdoc": "jsdoc-md",
-    "coverage": "nyc npm test",
+    "coverage": "c8 npm test",
     "pretest": "semistandard",
     "test": "mocha --recursive test"
   },
@@ -22,13 +22,13 @@
     "gaussian": "^1.1.0"
   },
   "devDependencies": {
+    "c8": "^7.7.1",
     "chai": "^4.2.0",
-    "jsdoc-md": "^6.0.0",
-    "mocha": "^7.0.0",
-    "nyc": "^15.0.0",
-    "semistandard": "^14.0.0"
+    "jsdoc-md": "^9.1.1",
+    "mocha": "^8.3.2",
+    "semistandard": "^16.0.0"
   },
-  "nyc": {
+  "c8": {
     "include": [
       "src"
     ],
@@ -36,7 +36,6 @@
       "lcov",
       "text"
     ],
-    "cache": true,
     "all": true
   },
   "semistandard": {
