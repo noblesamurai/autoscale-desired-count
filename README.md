@@ -2,11 +2,18 @@
 
 > estimate the number of processes required to keep up with the current demand
 
+## Prerequisites
+
+```
+$ pip install pre-commit
+```
+
 ## Installation
 
 This module is installed via npm:
 
 ```bash
+$ pre-commit install --install-hooks
 $ npm install autoscale-desired-count
 ```
 
